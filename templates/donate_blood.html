@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <title>Donate Blood</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Register as a Blood Donor</h1>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="donor_name" class="form-label">Your Name</label>
+                <input type="text" class="form-control" id="donor_name" name="donor_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="blood_type" class="form-label">Blood Type</label>
+                <input type="text" class="form-control" id="blood_type" name="blood_type" required>
+            </div>
+            <div class="mb-3">
+                <label for="contact_info" class="form-label">Contact Info</label>
+                <input type="email" class="form-control" id="contact_info" name="contact_info" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

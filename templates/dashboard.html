@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bridge Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@1.9.6/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 px-10">
+
+    <div class="container mx-auto px-4 py-8">
+        <nav class="bg-blue-600 p-4 shadow-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/" class="text-white text-2xl font-bold">Blood Bridge</a>
+                <ul class="flex space-x-4">
+                    <li>
+                        <a href="{{ url_for('request_blood') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Request Blood</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('update_inventory') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Update Inventory</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('donate_blood') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Donate Blood</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('dashboard') }}" class="text-white hover:bg-blue-700 px-3 py-2 rounded-md">Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+            
+        </div>
+
+        <h2 class="text-2xl font-semibold mb-4">Recent Blood Requests</h2>
+        <table class="min-w-full bg-white border border-gray-300 mt-4 rounded-lg shadow-md">
+            <thead>
+                <tr class="bg-blue-500 text-white">
+                    <th class="border-b border-gray-300 px-4 py-2 text-left">Blood Type</th>
+                    <th class="border-b border-gray-300 px-4 py-2 text-left">Quantity</th>
+                    <th class="border-b border-gray-300 px-4 py-2 text-left">Priority</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in blood_requests %}
+                <tr class="hover:bg-gray-100 transition duration-200">
+                    <td class="border-b border-gray-300 px-4 py-2">{{ request.blood_type }}</td>
+                    <td class="border-b border-gray-300 px-4 py-2">{{ request.quantity }}</td>
+                    <td class="border-b border-gray-300 px-4 py-2">{{ 'High' if request.priority else 'Normal' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+
+            <div class="container mx-auto mt-10">
+                <h2 class="text-2xl font-semibold mb-4">Blood Requests</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for request in blood_requests %}
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <h3 class="text-lg font-bold">{{ request.blood_type }}</h3>
+                        <p class="text-gray-600">Quantity: {{ request.quantity }} units</p>
+                        <p class="text-green-600">Priority: {{ 'High' if request.priority else 'Normal' }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="container mx-auto mt-10">
+                <h2 class="text-2xl font-semibold mb-4">Donors</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for donor in donors %}
+                    <div class="bg-white shadow-lg rounded-lg p-4">
+                        <strong class="text-lg">{{ donor.donor_name }}</strong>
+                        <p><strong>Blood Type:</strong> {{ donor.blood_type }}</p>
+                        <p><strong>Contact Info:</strong> {{ donor.contact_info }}</p>
+                        <p><strong>Address:</strong> {{ donor.address }}</p>
+                        <p class="text-green-600"><strong>Type:</strong> Donor</p> <!-- Mark donor -->
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+</body>
+</html>
